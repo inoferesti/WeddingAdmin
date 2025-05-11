@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت مراسم عروسی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/admin-styles.css">
+</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/admin-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="loginForm" class="login-container">
+        <h2>ورود به پنل مدیریت</h2>
+        <input type="password" id="passwordInput" placeholder="رمز عبور">
+        <button onclick="login()" class="action-button" style="margin: auto;">ورود</button>
+    </div>
+
+    <div id="dashboard" class="dashboard hidden">
+        <header class="admin-header">
+            <h1>پنل مدیریت مراسم عروسی</h1>
+            <div class="stats-summary">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>کل مهمانان</h3>
+                    <p id="totalGuests">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>پذیرفته‌شده</h3>
+                    <p id="acceptedGuests">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-times-circle"></i>
+                    <h3>نپذیرفته</h3>
+                    <p id="declinedGuests">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>در انتظار پاسخ</h3>
+                    <p id="pendingGuests">0</p>
+                </div>
+            </div>
+        </header>
+        
+
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="responses-table">
+            <div class="table-header">
+                <h2>لیست مهمانان</h2>
+                <div class="table-actions">
+                    <button id="exportExcel" class="action-button">
+                        <i class="fas fa-file-excel"></i> خروجی اکسل
+                    </button>
+                    <button id="printList" class="action-button">
+                        <i class="fas fa-print"></i> چاپ لیست
+                    </button>
+                    <i class="fas fa-search"></i>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="جستجو در لیست مهمانان...">
+                    </div>
+                </div>
+            </div>
+            <table id="responsesTable">
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>وضعیت حضور</th>
+                        <th>تعداد همراهان</th>
+                        <th>پیام</th>
+                        <th>تاریخ ثبت</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody id="responsesBody"></tbody>
+            </table>
+        </div>
+
+        <div class="link-generator">
+            <h2>ایجاد لینک دعوت</h2>
+            <form id="linkGeneratorForm" class="link-form">
+                <div class="form-group">
+                    <label>نام و نام خانوادگی</label>
+                    <input type="text" id="nameInput" placeholder="مثال: سارا سلیمانی" required>
+                </div>
+                <div class="form-group">
+                    <label>توضیحات</label>
+                    <input type="text" id="detailsInput" placeholder="مثال: به همراه خانواده" required>
+                </div>
+                <div class="form-group">
+                    <label>تعداد همراهان</label>
+                    <input type="number" id="guestCountInput" min="0" value="1">
+                </div>
+                <div class="form-group">
+                    <label>تعداد همراهان</label>
+                    <input type="number" id="guestCountInput" min="1" value="1">
+                </div>
+                <button type="submit" class="action-button" style="margin: auto;">ایجاد لینک</button>
+            </form>
+            <div class="generated-link-container" id="generatedLinkContainer" style="display: none;">
+                <h3>لینک دعوت</h3>
+                <div class="link-actions">
+                    <input type="text" id="generatedLink" readonly>
+                    <button type="button" id="copyLink" class="action-button">
+                        <i class="fas fa-copy"></i> کپی لینک
+                    </button>
+                    <button type="button" id="shareWhatsapp" class="action-button whatsapp">
+                        <i class="fab fa-whatsapp"></i> واتساپ
+                    </button>
+                    <button type="button" id="shareTelegram" class="action-button telegram">
+                        <i class="fab fa-telegram"></i> تلگرام
+                    </button>
+                    <button type="button" id="shareInstagram" class="action-button instagram">
+                        <i class="fab fa-instagram"></i> اینستاگرام
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/admin-script.js"></script>
+</body>
+</html>
