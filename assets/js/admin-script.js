@@ -193,20 +193,18 @@ function formatDate(isoDate) {
 // Link generator
 document.getElementById('linkGeneratorForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    const firstName = document.getElementById('firstNameInput').value;
-    const lastName = document.getElementById('lastNameInput').value;
+    const nameInput = document.getElementById('nameInput').value;
     const details = document.getElementById('detailsInput').value;
     const guestCount = document.getElementById('guestCountInput').value;
-    
     // Create the invitation URL with all parameters
-    const baseUrl = 'https://inoferesti.github.io/Wedding';
+    const baseUrl = 'https://imanno7.github.io/Wedding';
     const params = new URLSearchParams();
-    params.set('name', `${firstName}-${lastName}`);
+    params.set('name', `${nameInput}`);
     params.set('details', details);
     params.set('count', guestCount);
         
     const invitationUrl = `${baseUrl}?${params.toString()}`;
+    debugger;
     
     const linkElement = document.getElementById('generatedLink');
     const linkContainer = document.getElementById('generatedLinkContainer');
@@ -215,27 +213,27 @@ document.getElementById('linkGeneratorForm').addEventListener('submit', async fu
     
     // Add to guest list immediately
     // Save new invitation to Google Sheets
-    try {
-        const data = {
-            firstName: firstName,
-            lastName: lastName,
-            details: details,
-            count: guestCount,
-            timestamp: new Date().toISOString(),
-            status: 'pending'
-        };
+    //try {
+    //    const data = {
+    //        firstName: firstName,
+    //        lastName: lastName,
+    //        details: details,
+    //        count: guestCount,
+    //        timestamp: new Date().toISOString(),
+    //        status: 'pending'
+    //    };
         
-        await fetch('https://script.google.com/macros/s/AKfycbywMC0gObdym8Fs5Ct5WtxbGIvUFhcjgpAO7ZFMqBOvUDTqrNbbL994J9oMVOMhSROgDw/exec?action=addInvitation', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
+    //    await fetch('https://script.google.com/macros/s/AKfycbywMC0gObdym8Fs5Ct5WtxbGIvUFhcjgpAO7ZFMqBOvUDTqrNbbL994J9oMVOMhSROgDw/exec?action=addInvitation', {
+    //        method: 'POST',
+    //        body: JSON.stringify(data)
+    //    });
         
-        // Reload the guest list
-        loadResponses();
-    } catch (error) {
-        console.error('Error saving invitation:', error);
-        alert('خطا در ذخیره دعوتنامه');
-    }
+    //    // Reload the guest list
+    //    loadResponses();
+    //} catch (error) {
+    //    console.error('Error saving invitation:', error);
+    //    alert('خطا در ذخیره دعوتنامه');
+    //}
 });
 
 // Update charts
@@ -450,19 +448,19 @@ function initializeLinkGenerator() {
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            const nameInput = document.getElementById('nameInput').value;
-            const details = document.getElementById('detailsInput').value;
-            const count = document.getElementById('guestCountInput').value;
+            //const nameInput = document.getElementById('nameInput').value;
+            //const details = document.getElementById('detailsInput').value;
+            //const count = document.getElementById('guestCountInput').value;
             
-            // Use the current URL to determine the base URL
-            const currentUrl = window.location.href;
-            const baseUrl = currentUrl.split('/admin.html')[0];
+            //// Use the current URL to determine the base URL
+            //const currentUrl = window.location.href;
+            //const baseUrl = currentUrl.split('/admin.html')[0];
             
-            // Generate the link with name, details, and count parameters
-            const link = `${baseUrl}/?name=${encodeURIComponent(nameInput)}&details=${encodeURIComponent(details)}&count=${count}`;
+            //// Generate the link with name, details, and count parameters
+            //const link = `${baseUrl}/?name=${encodeURIComponent(nameInput)}&details=${encodeURIComponent(details)}&count=${count}`;
             
-            if (container) container.style.display = 'block';
-            if (linkInput) linkInput.value = link;
+            //if (container) container.style.display = 'block';
+            //if (linkInput) linkInput.value = link;
         });
     }
 }
